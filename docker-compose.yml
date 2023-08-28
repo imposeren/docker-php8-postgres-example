@@ -12,9 +12,9 @@ services:
     platform: linux/arm64
     tty: true
     depends_on:
-      - mysql
       - postgres
-      - redis
+#      - mysql
+#      - redis
     networks:
       - skeleton-docker.network
     ports:
@@ -30,12 +30,12 @@ services:
     tty: true
     depends_on:
       - php
-      - mysql
       - postgres
-      - redis
+#      - mysql
+#      - redis
     ports:
-      - "80:80"
-      - "433:433"
+      - "8000:80"
+      - "43300:433"
     volumes:
       - .:/var/www/app.dev
     networks:
@@ -78,23 +78,23 @@ services:
   #      - MYSQL_ROOT_PASSWORD=root
   #      - MYSQL_DATABASE=development
 
-  mysql:
-    build: ./docker/mysql
-    restart: always
-    container_name: skeleton-docker.mysql
-    platform: linux/arm64
-    tty: true
-    networks:
-      - skeleton-docker.network
-    ports:
-      - "3306:3306"
-    volumes:
-      - "./docker/mysql/config/mysql.cnf:/etc/mysql/conf.d/custom.cnf:ro"
-      - "./docker/mysql/dbdata:/var/lib/mysql"
-    environment:
-      - MYSQL_PASSWORD=root
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=development
+#  mysql:
+#    build: ./docker/mysql
+#    restart: always
+#    container_name: skeleton-docker.mysql
+#    platform: linux/arm64
+#    tty: true
+#    networks:
+#      - skeleton-docker.network
+#    ports:
+#      - "3306:3306"
+#    volumes:
+#      - "./docker/mysql/config/mysql.cnf:/etc/mysql/conf.d/custom.cnf:ro"
+#      - "./docker/mysql/dbdata:/var/lib/mysql"
+#    environment:
+#      - MYSQL_PASSWORD=root
+#      - MYSQL_ROOT_PASSWORD=root
+#      - MYSQL_DATABASE=development
 
   #  phpmyadmin:
   #    image: library/phpmyadmin
@@ -131,17 +131,17 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=development
 
-  redis:
-    image: bitnami/redis:latest
-    restart: always
-    container_name: skeleton-docker.redis
-    tty: true
-    volumes:
-      - ./docker/redis:/bitnami/redis/data
-    networks:
-      - skeleton-docker.network
-    environment:
-      - ALLOW_EMPTY_PASSWORD=no
-      - REDIS_PASSWORD=root
-    ports:
-      - "6379:6379"
+#  redis:
+#    image: bitnami/redis:latest
+#    restart: always
+#    container_name: skeleton-docker.redis
+#    tty: true
+#    volumes:
+#      - ./docker/redis:/bitnami/redis/data
+#    networks:
+#      - skeleton-docker.network
+#    environment:
+#      - ALLOW_EMPTY_PASSWORD=no
+#      - REDIS_PASSWORD=root
+#    ports:
+#      - "6379:6379"

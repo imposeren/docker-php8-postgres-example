@@ -1,9 +1,11 @@
-FROM php:8.2-fpm-alpine
+FROM php:8.2-fpm-alpine3.18
 LABEL MAINTAINER="Vagner Cardoso <vagnercardosoweb@gmail.com>"
 
 # Environments
 ENV TZ=America/Sao_Paulo
 ENV WORKDIR=/var/www/app.dev
+
+RUN echo -e "https://dl-cdn.alpinelinux.org/alpine/v3.18/main\nhttps://dl-cdn.alpinelinux.org/alpine/v3.18/community" > /etc/apk/repositories
 
 # Updates and installs system dependencies
 RUN apk add --update --no-cache \
